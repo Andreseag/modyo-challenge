@@ -19,17 +19,14 @@ function GameCard({ card }: Props) {
       <div className="board-game__card__container relative transition-all ease-in-out duration-500 w-full h-full">
         <div
           className="board-game__card__front 
-        text-white text-6xl 
-        bg-purple-700 
+        text-slate-800 text-6xl
+          font-semibold
+        bg-green-400 
           "
         >
           {card}
         </div>
-        <div
-          className="board-game__card__back 
-          bg-orange-500
-          "
-        >
+        <div className="board-game__card__back">
           Lorem ipsum, dolor sit amet
         </div>
       </div>
