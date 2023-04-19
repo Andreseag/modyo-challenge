@@ -1,3 +1,11 @@
+import GameBoard from "@/components/GameBoard/GameBoard";
+import PlayerInfo from "@/components/PlayerInfo/PlayerInfo";
+
 export default function Home() {
-  return <>Main page</>;
+  return (
+    <>
+      <PlayerInfo />
+      <GameBoard />
+    </>
+  );
 }

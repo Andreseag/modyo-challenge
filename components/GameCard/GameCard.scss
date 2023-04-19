@@ -1,0 +1,18 @@
+.board-game__card {
+  &__container {
+    transform-style: preserve-3d;
+  }
+
+  &__front,
+  &__back {
+    @apply absolute w-full h-full rounded-md flex items-center justify-center;
+    backface-visibility: hidden;
+  }
+
+  &__back {
+    transform: rotateX(180deg);
+  }
+  &:hover .board-game__card__container {
+    transform: rotateX(-180deg);
+  }
+}
