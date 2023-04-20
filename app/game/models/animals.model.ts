@@ -13,6 +13,7 @@ interface Meta2 {
 export interface Entry {
   meta: Meta;
   fields: Fields;
+  active: boolean;
 }
 
 interface Fields {

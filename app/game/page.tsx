@@ -21,6 +21,16 @@ function Page() {
     fetchAnimals();
   }, []);
 
+  const resetScores = () => {
+    setScore(0);
+    setErrors(0);
+    setHits(0);
+  };
+
+  const resetShowWinner = () => {
+    setShowWinner(false);
+  };
+
   return (
     <>
       <PlayerInfo errors={errors} hits={hits} />
@@ -39,7 +49,13 @@ function Page() {
           <span className="font-bold text-slate-800">{score}</span>
         </div>
       </div>
-      {showWinner && <GameWinnerModal score={score} />}
+      {showWinner && (
+        <GameWinnerModal
+          score={score}
+          resetScores={resetScores}
+          resetShowWinner={resetShowWinner}
+        />
+      )}
     </>
   );
 }

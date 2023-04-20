@@ -1,4 +1,9 @@
-function PlayerInfo({ errors, hits }: any) {
+interface Props {
+  errors: number;
+  hits: number;
+}
+
+function PlayerInfo({ errors, hits }: Props) {
   return (
     <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-3/5 m-auto">
       <div className="player-info__container">

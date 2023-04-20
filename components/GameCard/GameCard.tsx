@@ -1,10 +1,16 @@
 import classnames from "classnames";
 import Image from "next/image";
 import "./GameCard.scss";
+import { Entry } from "@/app/game/models";
 
-// interface Props {
-//   card: string;
-// }
+interface Props {
+  card: Entry;
+  onClick: Function;
+  index: number;
+  isDisabled: boolean;
+  isInactive: boolean;
+  isSelected: boolean;
+}
 
 function GameCard({
   card,
@@ -12,10 +18,11 @@ function GameCard({
   index,
   isDisabled,
   isInactive,
-  isFlipped,
-}: any) {
+  isSelected,
+}: Props) {
   const handleClick = () => {
-    !isFlipped && !isDisabled && onClick(index);
+    // Validate if the the card is not selected or disabled for not execute onclick event
+    !isSelected && !isDisabled && onClick(index);
   };
 
   return (
@@ -34,7 +41,7 @@ function GameCard({
         className={classnames(
           "board-game__card__container relative transition-all ease-in-out duration-500 w-full h-full",
           {
-            active: isFlipped,
+            active: isSelected,
             inactive: isInactive,
           }
         )}

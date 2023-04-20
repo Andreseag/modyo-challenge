@@ -2,9 +2,20 @@ import Image from "next/image";
 
 interface Props {
   score: number;
+  resetScores: Function;
+  resetShowWinner: Function;
 }
 
-function GameWinnerModal({ score }: Props) {
+function GameWinnerModal({ score, resetScores, resetShowWinner }: Props) {
+  const restartGame = () => {
+    resetScores();
+    resetShowWinner();
+  };
+
+  const restartPlayer = () => {
+    resetScores();
+  };
+
   return (
     <div
       className="game-winner-modal
@@ -44,6 +55,7 @@ function GameWinnerModal({ score }: Props) {
         <button
           className="mb-3 h-12 text-lg  text-slate-800 bg-green-400 hover:bg-green-500 rounded w-full"
           type="button"
+          onClick={restartGame}
         >
           Reiniciar juego
         </button>
