@@ -3,26 +3,36 @@ import GameCard from "@/components/GameCard/GameCard";
 import { shuffleCards } from "@/domain/animals";
 import { useEffect, useRef, useState } from "react";
 
-function GameBoard({ entries, setScore, setErrors, setHits }: any) {
+function GameBoard({
+  entries,
+  setScore,
+  setErrors,
+  setHits,
+  setShowWinner,
+}: any) {
   const [cards, setCards] = useState<Entry[]>(() =>
     shuffleCards(entries.concat(entries))
   );
   const [openCards, setOpenCards] = useState<any>([]);
   const [clearedCards, setClearedCards] = useState<any>({});
-  const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
+  const [disableCards, setDisableCards] = useState(false);
   const timeout = useRef<any>(null);
 
-  const disable = () => {
-    setShouldDisableAllCards(true);
+  const disableCardsToggle = () => {
+    setDisableCards((disable) => !disable);
   };
-  const enable = () => {
-    setShouldDisableAllCards(false);
+
+  // Validate of the game is ended
+  const validateGameCompletion = () => {
+    if (Object.keys(clearedCards).length === entries.length) {
+      setShowWinner(true);
+    }
   };
 
   // Check if both the cards have same type. If they do, mark them inactive
   const evaluate = () => {
     const [first, second] = openCards;
-    enable();
+    disableCardsToggle();
     if (cards[first].fields.image.uuid === cards[second].fields.image.uuid) {
       setClearedCards((prev: any) => ({
         ...prev,
@@ -45,13 +55,21 @@ function GameBoard({ entries, setScore, setErrors, setHits }: any) {
       setOpenCards((prev: any) => [...prev, index]);
       // Add move to moves counter
       setScore((moves: number) => moves + 1);
-      disable();
+      disableCardsToggle();
     }
 
     if (openCards.length === 0) {
       clearTimeout(timeout.current);
       setOpenCards([index]);
     }
+  };
+
+  const checkIsFlipped = (index: number) => {
+    return openCards.includes(index);
+  };
+
+  const checkIsInactive = (card: Entry) => {
+    return Boolean(clearedCards[card.fields.image.uuid]);
   };
 
   useEffect(() => {
@@ -64,13 +82,9 @@ function GameBoard({ entries, setScore, setErrors, setHits }: any) {
     };
   }, [openCards]);
 
-  const checkIsFlipped = (index: number) => {
-    return openCards.includes(index);
-  };
-
-  const checkIsInactive = (card: Entry) => {
-    return Boolean(clearedCards[card.fields.image.uuid]);
-  };
+  useEffect(() => {
+    validateGameCompletion();
+  }, [clearedCards]);
 
   return (
     <div className="game-board m-auto w-3/5 bg-white p-4 border shadow-sm rounded-md">
@@ -80,7 +94,7 @@ function GameBoard({ entries, setScore, setErrors, setHits }: any) {
             key={index}
             index={index}
             card={card}
-            isDisabled={shouldDisableAllCards}
+            isDisabled={disableCards}
             isInactive={checkIsInactive(card)}
             isFlipped={checkIsFlipped(index)}
             onClick={handleCardClick}
