@@ -1,10 +1,23 @@
+import classnames from "classnames";
+import Image from "next/image";
 import "./GameCard.scss";
 
-interface Props {
-  card: string;
-}
+// interface Props {
+//   card: string;
+// }
 
-function GameCard({ card }: Props) {
+function GameCard({
+  card,
+  onClick,
+  index,
+  isDisabled,
+  isInactive,
+  isFlipped,
+}: any) {
+  const handleClick = () => {
+    !isFlipped && !isDisabled && onClick(index);
+  };
+
   return (
     <div
       className="board-game__card
@@ -15,8 +28,17 @@ function GameCard({ card }: Props) {
       hover:scale-110
       h-40 w-28
       "
+      onClick={handleClick}
     >
-      <div className="board-game__card__container relative transition-all ease-in-out duration-500 w-full h-full">
+      <div
+        className={classnames(
+          "board-game__card__container relative transition-all ease-in-out duration-500 w-full h-full",
+          {
+            active: isFlipped,
+            inactive: isInactive,
+          }
+        )}
+      >
         <div
           className="board-game__card__front 
         text-slate-800 text-6xl
@@ -24,10 +46,16 @@ function GameCard({ card }: Props) {
         bg-green-400 
           "
         >
-          {card}
+          ?
         </div>
-        <div className="board-game__card__back">
-          Lorem ipsum, dolor sit amet
+        <div className="board-game__card__back bg-red-700">
+          <Image
+            className="object-cover h-full w-full rounded-md"
+            src={card.fields.image.url}
+            alt={card.fields.image.title}
+            width="112"
+            height="160"
+          />
         </div>
       </div>
     </div>

@@ -5,6 +5,14 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    // remotePatterns is the config for URLs that the App need for work, this is necessary for the app security
+    remotePatterns: [
+      {
+        hostname: "cloud.modyocdn.com",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

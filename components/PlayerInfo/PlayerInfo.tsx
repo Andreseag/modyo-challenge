@@ -1,4 +1,4 @@
-function PlayerInfo() {
+function PlayerInfo({ errors, hits }: any) {
   return (
     <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-3/5 m-auto">
       <div className="player-info__container">
@@ -23,12 +23,12 @@ function PlayerInfo() {
           </div>
           <div className="player-info__player-scores flex flex-col gap-1">
             <div className="player-info__player-errors flex gap-3">
-              <p className="text-lg ">Errors:</p>
-              <span className="text-lg font-bold text-slate-800">640</span>
+              <p className="text-lg ">Errores:</p>
+              <span className="text-lg font-bold text-slate-800">{errors}</span>
             </div>
             <div className="player-info__player-hits flex gap-3">
-              <p className="text-lg ">Hits:</p>
-              <span className="text-lg font-bold text-slate-800">640</span>
+              <p className="text-lg ">Aciertos:</p>
+              <span className="text-lg font-bold text-slate-800">{hits}</span>
             </div>
           </div>
         </div>

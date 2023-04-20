@@ -1,6 +1,13 @@
 .board-game__card {
   &__container {
     transform-style: preserve-3d;
+
+    &.active {
+      transform: rotateX(-180deg);
+    }
+    &.inactive {
+      @apply opacity-0 cursor-default;
+    }
   }
 
   &__front,
@@ -11,8 +18,5 @@
 
   &__back {
     transform: rotateX(180deg);
-  }
-  .board-game__card__container.active {
-    transform: rotateX(-180deg);
   }
 }

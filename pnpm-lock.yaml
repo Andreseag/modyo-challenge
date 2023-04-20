@@ -6,6 +6,7 @@ specifiers:
   '@types/react-dom': 18.0.11
   airbnb: ^0.0.2
   autoprefixer: ^10.4.14
+  classnames: ^2.3.2
   eslint: 8.38.0
   eslint-config-next: 13.3.0
   eslint-config-node: ^4.1.0
@@ -36,6 +37,7 @@ dependencies:
 
 devDependencies:
   autoprefixer: 10.4.14_postcss@8.4.22
+  classnames: 2.3.2
   eslint: 8.38.0
   eslint-config-node: 4.1.0_eslint@8.38.0
   eslint-config-prettier: 8.8.0_eslint@8.38.0
@@ -720,6 +722,10 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  /classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: true
 
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
