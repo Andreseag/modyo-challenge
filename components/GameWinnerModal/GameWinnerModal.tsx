@@ -4,12 +4,19 @@ interface Props {
   score: number;
   resetScores: Function;
   resetShowWinner: Function;
+  setStarGame: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function GameWinnerModal({ score, resetScores, resetShowWinner }: Props) {
+function GameWinnerModal({
+  score,
+  resetScores,
+  resetShowWinner,
+  setStarGame,
+}: Props) {
   const restartGame = () => {
     resetScores();
     resetShowWinner();
+    setStarGame(true);
   };
 
   const restartPlayer = () => {

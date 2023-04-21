@@ -12,6 +12,7 @@ function Page() {
   const [errors, setErrors] = useState<number>(0);
   const [hits, setHits] = useState<number>(0);
   const [showWinner, setShowWinner] = useState(false);
+  const [starGame, setStarGame] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -41,6 +42,8 @@ function Page() {
           setErrors={setErrors}
           setHits={setHits}
           setShowWinner={setShowWinner}
+          starGame={starGame}
+          setStarGame={setStarGame}
         />
       )}
       <div className="m-auto mt-4 w-3/5 bg-white p-4 border shadow-sm rounded-md">
@@ -54,6 +57,7 @@ function Page() {
           score={score}
           resetScores={resetScores}
           resetShowWinner={resetShowWinner}
+          setStarGame={setStarGame}
         />
       )}
     </>

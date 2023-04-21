@@ -9,6 +9,8 @@ interface Props {
   setErrors: React.Dispatch<React.SetStateAction<number>>;
   setHits: React.Dispatch<React.SetStateAction<number>>;
   setShowWinner: React.Dispatch<React.SetStateAction<boolean>>;
+  starGame: boolean;
+  setStarGame: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function GameBoard({
@@ -17,14 +19,16 @@ function GameBoard({
   setErrors,
   setHits,
   setShowWinner,
+  starGame,
+  setStarGame,
 }: Props) {
   const [cards, setCards] = useState<Entry[]>(() =>
     shuffleCards(entries.concat(entries))
   );
   const [openCards, setOpenCards] = useState<number[]>([]);
-  const [clearedCards, setClearedCards] = useState<{}>({});
+  const [clearedCards, setClearedCards] = useState<any>({});
   const [disableCards, setDisableCards] = useState<boolean>(false);
-  const timeout = useRef<any>(null);
+  const timeout = useRef<NodeJS.Timeout>();
 
   // Toggle state to boolean state disableCards
   const disableCardsToggle = () => {
@@ -53,7 +57,6 @@ function GameBoard({
     } else {
       setErrors((errors: number) => errors + 1);
     }
-    console.log("clearedCards: ", clearedCards);
     // Flip cards after a 500ms duration
     timeout.current = setTimeout(() => {
       setOpenCards([]);
@@ -62,14 +65,17 @@ function GameBoard({
 
   const handleCardClick = (index: number) => {
     if (openCards.length === 1) {
-      setOpenCards((prev: any) => [...prev, index]);
+      // Add index to card to openCards state
+      setOpenCards((prev: number[]) => [...prev, index]);
       // Add move to moves counter
       setScore((moves: number) => moves + 1);
+      // Disable cards
       disableCardsToggle();
     }
 
     if (openCards.length === 0) {
       clearTimeout(timeout.current);
+      // Add index to card to openCards state
       setOpenCards([index]);
     }
   };
@@ -83,6 +89,21 @@ function GameBoard({
   const checkIsInactive = (card: Entry) => {
     return Boolean(clearedCards[card.fields.image.uuid]);
   };
+
+  // restart board
+  const restartBoard = () => {
+    setClearedCards({});
+    setOpenCards([]);
+    setDisableCards(false);
+    // Set a shuffled deck of cards
+    setCards(shuffleCards(entries.concat(entries)));
+    // Reset start game
+    setStarGame(false);
+  };
+
+  useEffect(() => {
+    starGame && restartBoard();
+  }, [starGame]);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
