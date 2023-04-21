@@ -1,4 +1,6 @@
-function AddPlayerName() {
+import React from "react";
+
+function AddPlayerNameModal() {
   return (
     <div className="add-player-name w-full flex flex-col items-start gap-2">
       <label
@@ -23,4 +25,4 @@ function AddPlayerName() {
   );
 }
 
-export default AddPlayerName;
+export default AddPlayerNameModal;

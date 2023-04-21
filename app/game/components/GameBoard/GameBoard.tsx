@@ -1,5 +1,5 @@
 import { Entry } from "@/app/game/models";
-import GameCard from "@/components/GameCard/GameCard";
+import GameCard from "@/app/game/components/GameCard/GameCard";
 import { shuffleCards } from "@/domain/animals";
 import React, { useEffect, useRef, useState } from "react";
 

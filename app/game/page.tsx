@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import GameBoard from "@/components/GameBoard/GameBoard";
-import PlayerInfo from "@/components/PlayerInfo/PlayerInfo";
+import GameBoard from "@/app/game/components/GameBoard/GameBoard";
+import PlayerInfo from "@/app/game/components/PlayerInfo/PlayerInfo";
 import { getAnimals } from "./services";
 import { Animals } from "./models";
-import GameWinnerModal from "@/components/GameWinnerModal/GameWinnerModal";
+import GameWinnerModal from "@/app/game/components/GameWinnerModal/GameWinnerModal";
 
 function Page() {
   const [animals, setAnimals] = useState<Animals>();
@@ -13,6 +13,7 @@ function Page() {
   const [hits, setHits] = useState<number>(0);
   const [showWinner, setShowWinner] = useState(false);
   const [starGame, setStarGame] = useState<boolean>(false);
+  const [playerName, setPlayerName] = useState<string>("");
 
   useEffect(() => {
     const fetchAnimals = async () => {
