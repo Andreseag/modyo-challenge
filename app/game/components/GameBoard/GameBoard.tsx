@@ -1,6 +1,6 @@
 import { Entry } from "@/app/game/models";
 import GameCard from "@/app/game/components/GameCard/GameCard";
-import { shuffleCards } from "@/domain/animals";
+import { shuffleCards } from "@/domain/cards";
 import React, { useEffect, useRef, useState } from "react";
 
 interface Props {
@@ -42,7 +42,7 @@ function GameBoard({
     }
   };
 
-  // Check if both the cards have same type. If they do, mark them inactive
+  // Check if both the cards have same uuid and inactive cards.
   const evaluate = () => {
     const [first, second] = openCards;
     disableCardsToggle();
@@ -57,7 +57,7 @@ function GameBoard({
     } else {
       setErrors((errors: number) => errors + 1);
     }
-    // Flip cards after a 500ms duration
+    // restore selected cards after a 500ms duration
     timeout.current = setTimeout(() => {
       setOpenCards([]);
     }, 500);
@@ -101,10 +101,12 @@ function GameBoard({
     setStarGame(false);
   };
 
+  // Watch if the startGame is true and restart board
   useEffect(() => {
     starGame && restartBoard();
   }, [starGame]);
 
+  // Watch if openCards have 2 elements and execute evaluate function
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
     if (openCards.length === 2) {

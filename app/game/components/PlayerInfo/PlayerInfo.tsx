@@ -1,9 +1,10 @@
 interface Props {
   errors: number;
   hits: number;
+  playerName: string;
 }
 
-function PlayerInfo({ errors, hits }: Props) {
+function PlayerInfo({ errors, hits, playerName }: Props) {
   return (
     <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-3/5 m-auto">
       <div className="player-info__container">
@@ -20,11 +21,9 @@ function PlayerInfo({ errors, hits }: Props) {
                 text-white
                 font-bold"
             >
-              A
+              {playerName.charAt(0)}
             </span>
-            <p className="text-slate-800 text-lg font-semibold">
-              Andres Castro
-            </p>
+            <p className="text-slate-800 text-lg font-semibold">{playerName}</p>
           </div>
           <div className="player-info__player-scores flex flex-col gap-1">
             <div className="player-info__player-errors flex gap-3">

@@ -5,6 +5,8 @@ interface Props {
   resetScores: Function;
   resetShowWinner: Function;
   setStarGame: React.Dispatch<React.SetStateAction<boolean>>;
+  playerName: string;
+  resetPlayerName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function GameWinnerModal({
@@ -12,6 +14,8 @@ function GameWinnerModal({
   resetScores,
   resetShowWinner,
   setStarGame,
+  playerName,
+  resetPlayerName,
 }: Props) {
   const restartGame = () => {
     resetScores();
@@ -21,6 +25,9 @@ function GameWinnerModal({
 
   const restartPlayer = () => {
     resetScores();
+    resetShowWinner();
+    resetPlayerName("");
+    setStarGame(true);
   };
 
   return (
@@ -53,8 +60,8 @@ function GameWinnerModal({
           ¡Felicitaciones!
         </span>
         <p className="mb-4 text-slate-600 ">
-          <span className="font-bold">Andres</span> has completado correctamente
-          el juego
+          <span className="font-bold">{playerName}</span> has completado
+          correctamente el juego
         </p>
         <div className="score bg-slate-800 text-lg text-white py-2 px-8 rounded-3xl mb-4">
           Score: <span className="font-bold text-green-400">{score}</span>
@@ -69,6 +76,7 @@ function GameWinnerModal({
         <button
           className=" text-lg h-12  text-slate-800 border border-slate-800 bg-white hover:bg-slate-800 hover:text-white rounded w-full"
           type="button"
+          onClick={restartPlayer}
         >
           Cambiar de jugador
         </button>
