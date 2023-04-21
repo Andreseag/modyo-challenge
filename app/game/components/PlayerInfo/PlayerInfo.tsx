@@ -6,7 +6,7 @@ interface Props {
 
 function PlayerInfo({ errors, hits, playerName }: Props) {
   return (
-    <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-3/5 m-auto">
+    <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-full lg:w-3/5 m-auto">
       <div className="player-info__container">
         <div className="player-info__player flex justify-center items-center gap-6">
           <div className="player-info__player-avatar flex flex-col items-center px-6 border-r">

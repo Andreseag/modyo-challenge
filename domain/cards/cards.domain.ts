@@ -24,3 +24,8 @@ export function shuffleCards(entries: Entry[]): Entry[] {
   }
   return entries;
 }
+
+// Generate cards to create board
+export const generateShuffleCards = (entries: Entry[]) => {
+  return shuffleCards(entries.concat(entries));
+};

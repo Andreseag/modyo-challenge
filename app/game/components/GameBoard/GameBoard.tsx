@@ -1,10 +1,23 @@
-import { Entry } from "@/app/game/models";
-import GameCard from "@/app/game/components/GameCard/GameCard";
-import { shuffleCards } from "@/domain/cards";
 import React, { useEffect, useRef, useState } from "react";
 
+// Store
+import { useDispatch, useSelector } from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+
+// Models
+import { Entry } from "@/app/game/models";
+
+// Domain functions
+import { generateShuffleCards, shuffleCards } from "@/domain/cards";
+
+// Components
+import GameCard from "@/app/game/components/GameCard/GameCard";
+import { AppDispatch, RootState } from "@/store";
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 interface Props {
-  entries: Entry[];
   setScore: React.Dispatch<React.SetStateAction<number>>;
   setErrors: React.Dispatch<React.SetStateAction<number>>;
   setHits: React.Dispatch<React.SetStateAction<number>>;
@@ -14,7 +27,6 @@ interface Props {
 }
 
 function GameBoard({
-  entries,
   setScore,
   setErrors,
   setHits,
@@ -22,8 +34,10 @@ function GameBoard({
   starGame,
   setStarGame,
 }: Props) {
+  // const dispatch = useAppDispatch();
+  const gameCards = useAppSelector((state) => state.player.gameCards);
   const [cards, setCards] = useState<Entry[]>(() =>
-    shuffleCards(entries.concat(entries))
+    generateShuffleCards(gameCards.entries)
   );
   const [openCards, setOpenCards] = useState<number[]>([]);
   const [clearedCards, setClearedCards] = useState<any>({});
@@ -37,7 +51,7 @@ function GameBoard({
 
   // Validate of the game is ended
   const validateGameCompletion = () => {
-    if (Object.keys(clearedCards).length === entries.length) {
+    if (Object.keys(clearedCards).length === gameCards.entries.length) {
       setShowWinner(true);
     }
   };
@@ -90,13 +104,18 @@ function GameBoard({
     return Boolean(clearedCards[card.fields.image.uuid]);
   };
 
+  // Generate cards to create board
+  // const generateShuffleCards = () => {
+  //   return shuffleCards(gameCards.entries.concat(gameCards.entries));
+  // };
+
   // restart board
   const restartBoard = () => {
     setClearedCards({});
     setOpenCards([]);
     setDisableCards(false);
     // Set a shuffled deck of cards
-    setCards(shuffleCards(entries.concat(entries)));
+    setCards(generateShuffleCards(gameCards.entries));
     // Reset start game
     setStarGame(false);
   };
@@ -122,7 +141,7 @@ function GameBoard({
   }, [clearedCards]);
 
   return (
-    <div className="game-board m-auto w-3/5 bg-white p-4 border shadow-sm rounded-md">
+    <div className="game-board m-auto w-full lg:w-3/5 bg-white p-4 border shadow-sm rounded-md">
       <div className="board-game__container grid grid-cols-6 grid-rows-3 gap-3">
         {cards.map((card: Entry, index: number) => (
           <GameCard

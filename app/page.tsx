@@ -1,4 +1,4 @@
-import GameInit from "@/app/components/GameInit/GameInit";
+import GameInit from "@/components/GameInit/GameInit";
 
 export default function Home() {
   return (
