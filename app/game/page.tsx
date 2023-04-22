@@ -53,7 +53,7 @@ function Page() {
   }, []);
 
   return (
-    <>
+    <div className="game mx-4">
       {!playerName && <AddPlayerNameModal />}
       {playerName && (
         <>
@@ -85,7 +85,7 @@ function Page() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }
 

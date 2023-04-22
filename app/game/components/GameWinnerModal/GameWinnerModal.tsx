@@ -55,7 +55,7 @@ function GameWinnerModal({
       <div
         className="game-winner-modal__container text-center
         bg-white
-          w-1/2
+          w-11/12 md:w-1/2
           m-auto
           rounded-md
           p-8

@@ -16,7 +16,7 @@ function PlayerInfo({ errors, hits }: Props) {
   const playerName = useAppSelector((state) => state.game.playerName);
 
   return (
-    <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-full lg:w-3/5 m-auto">
+    <div className="payer-info mb-4 md:mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-full lg:w-3/5 m-auto">
       <div className="player-info__container">
         <div className="player-info__player flex justify-center items-center gap-6">
           <div className="player-info__player-avatar flex flex-col items-center px-6 border-r">
@@ -29,11 +29,14 @@ function PlayerInfo({ errors, hits }: Props) {
                 bg-green-400
                 text-4xl
                 text-white
-                font-bold"
+                font-bold
+                select-none"
             >
               {playerName.charAt(0)}
             </span>
-            <p className="text-slate-800 text-lg font-semibold">{playerName}</p>
+            <p className="text-slate-800 text-lg font-semibold capitalize">
+              {playerName}
+            </p>
           </div>
           <div className="player-info__player-scores flex flex-col gap-1">
             <div className="player-info__player-errors flex gap-3">
