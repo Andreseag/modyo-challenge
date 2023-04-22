@@ -52,10 +52,6 @@ function Page() {
     fetchAnimals();
   }, []);
 
-  useEffect(() => {
-    console.log("playerName: ", playerName);
-  }, [playerName]);
-
   return (
     <>
       {!playerName && <AddPlayerNameModal />}

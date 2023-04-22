@@ -15,8 +15,6 @@ interface Props {
 function PlayerInfo({ errors, hits }: Props) {
   const playerName = useAppSelector((state) => state.game.playerName);
 
-  console.log("playerName: ", playerName);
-
   return (
     <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-full lg:w-3/5 m-auto">
       <div className="player-info__container">
