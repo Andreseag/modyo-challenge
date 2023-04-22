@@ -1,13 +1,19 @@
 import classNames from "classnames";
 import { useState } from "react";
+// Store
+import { useDispatch, useSelector } from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { setPlayerName } from "@/store/gameSlice";
 
-interface Props {
-  setPlayerName: React.Dispatch<React.SetStateAction<string>>;
-}
+// Create dispatch  and selector to use redux
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-function AddPlayerNameModal({ setPlayerName }: Props) {
+function AddPlayerNameModal() {
   const [disabledButton, setDisableButton] = useState<boolean>(true);
   const [temporalName, setTemporalName] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   const onChangeNamePlayer = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -16,7 +22,7 @@ function AddPlayerNameModal({ setPlayerName }: Props) {
   };
 
   const handleSetPlayerName = () => {
-    setPlayerName(temporalName);
+    dispatch(setPlayerName(temporalName));
   };
 
   return (

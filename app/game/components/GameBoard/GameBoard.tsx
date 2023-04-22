@@ -3,17 +3,18 @@ import React, { useEffect, useRef, useState } from "react";
 // Store
 import { useDispatch, useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
 
 // Models
 import { Entry } from "@/app/game/models";
 
 // Domain functions
-import { generateShuffleCards, shuffleCards } from "@/domain/cards";
+import { generateShuffleCards } from "@/domain/cards";
 
 // Components
 import GameCard from "@/app/game/components/GameCard/GameCard";
-import { AppDispatch, RootState } from "@/store";
 
+// Create dispatch  and selector to use redux
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -35,7 +36,7 @@ function GameBoard({
   setStarGame,
 }: Props) {
   // const dispatch = useAppDispatch();
-  const gameCards = useAppSelector((state) => state.player.gameCards);
+  const gameCards = useAppSelector((state) => state.game.gameCards);
   const [cards, setCards] = useState<Entry[]>(() =>
     generateShuffleCards(gameCards.entries)
   );
@@ -103,11 +104,6 @@ function GameBoard({
   const checkIsInactive = (card: Entry) => {
     return Boolean(clearedCards[card.fields.image.uuid]);
   };
-
-  // Generate cards to create board
-  // const generateShuffleCards = () => {
-  //   return shuffleCards(gameCards.entries.concat(gameCards.entries));
-  // };
 
   // restart board
   const restartBoard = () => {

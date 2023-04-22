@@ -1,10 +1,12 @@
+"use client";
+
 import { configureStore } from "@reduxjs/toolkit";
 
 import gameReducer from "./gameSlice";
 
 export const store = configureStore({
   reducer: {
-    player: gameReducer,
+    game: gameReducer,
   },
 });
 

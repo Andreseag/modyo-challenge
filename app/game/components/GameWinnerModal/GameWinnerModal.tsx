@@ -1,4 +1,13 @@
 import Image from "next/image";
+// Store
+import { useDispatch, useSelector } from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { setPlayerName } from "@/store/gameSlice";
+
+// Create dispatch  and selector to use redux
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 interface Props {
   score: number;
@@ -6,7 +15,6 @@ interface Props {
   resetShowWinner: Function;
   setStarGame: React.Dispatch<React.SetStateAction<boolean>>;
   playerName: string;
-  resetPlayerName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function GameWinnerModal({
@@ -14,9 +22,10 @@ function GameWinnerModal({
   resetScores,
   resetShowWinner,
   setStarGame,
-  playerName,
-  resetPlayerName,
 }: Props) {
+  const dispatch = useAppDispatch();
+  const playerName = useAppSelector((state) => state.game.playerName);
+
   const restartGame = () => {
     resetScores();
     resetShowWinner();
@@ -26,7 +35,8 @@ function GameWinnerModal({
   const restartPlayer = () => {
     resetScores();
     resetShowWinner();
-    resetPlayerName("");
+    dispatch(setPlayerName(""));
+    // resetPlayerName("");
     setStarGame(true);
   };
 

@@ -1,10 +1,22 @@
+// Store
+import { useDispatch, useSelector } from "react-redux";
+import type { TypedUseSelectorHook } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+
+// Create dispatch  and selector to use redux
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 interface Props {
   errors: number;
   hits: number;
-  playerName: string;
 }
 
-function PlayerInfo({ errors, hits, playerName }: Props) {
+function PlayerInfo({ errors, hits }: Props) {
+  const playerName = useAppSelector((state) => state.game.playerName);
+
+  console.log("playerName: ", playerName);
+
   return (
     <div className="payer-info mb-8 mt-8 bg-white shadow-sm border rounded-md p-4 w-full lg:w-3/5 m-auto">
       <div className="player-info__container">
