@@ -3,5 +3,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="game-view">{children}</div>;
+  return <div className="game-view flex justify-center">{children}</div>;
 }

@@ -42,7 +42,7 @@ function GameWinnerModal({
 
   return (
     <div
-      className="game-winner-modal
+      className="game__winner-modal
       fixed
       inset-0 
       bg-gray-600 
@@ -53,7 +53,8 @@ function GameWinnerModal({
       flex"
     >
       <div
-        className="game-winner-modal__container text-center
+        className="game__winner-modal__container
+          text-center
         bg-white
           w-11/12 md:w-1/2
           m-auto
