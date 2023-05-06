@@ -26,7 +26,7 @@ function GameCard({
   };
 
   return (
-    <div
+    <article
       className="board-game__card
       cursor-pointer
       transition
@@ -67,7 +67,7 @@ function GameCard({
           />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

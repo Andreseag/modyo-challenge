@@ -16,7 +16,7 @@ function PlayerInfo({ errors, hits }: Props) {
   const playerName = useAppSelector((state) => state.game.playerName);
 
   return (
-    <div className="payer-info mb-4 md:mb-8 mt-1 md:mt-8 bg-white shadow-sm border rounded-md p-4">
+    <section className="payer-info mb-4 md:mb-8 mt-1 md:mt-8 bg-white shadow-sm border rounded-md p-4">
       <div className="player-info__container">
         <div className="player-info__player flex justify-center items-center gap-6">
           <div className="player-info__player-avatar flex flex-col items-center px-6 border-r">
@@ -52,7 +52,7 @@ function PlayerInfo({ errors, hits }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

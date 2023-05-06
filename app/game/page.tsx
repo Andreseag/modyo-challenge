@@ -54,7 +54,7 @@ function Page() {
   }, []);
 
   return (
-    <div className="game m-auto w-full mx-4 lg:w-4/5 xl:w-3/4 max-w-4xl">
+    <main className="game m-auto w-full mx-4 lg:w-4/5 xl:w-3/4 max-w-4xl">
       {!playerName && <AddPlayerNameModal />}
       {playerName && (
         <>
@@ -81,7 +81,7 @@ function Page() {
           )}
         </>
       )}
-    </div>
+    </main>
   );
 }
 
