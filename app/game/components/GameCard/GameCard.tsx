@@ -33,7 +33,7 @@ function GameCard({
       ease-in-out
       delay-0
       hover:scale-110
-      h-24 sm:h-36 md:h-40
+      h-20 sm:h-36 md:h-40
       w-full sm:w-24 md:w-28
       "
       onClick={handleClick}
